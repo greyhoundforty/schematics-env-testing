@@ -12,7 +12,7 @@ locals {
 
 resource "local_file" "vpc" {
   content = <<EOF
-    ${jsonencode(data.ibm_is_vpc.project)}
+    [${jsonencode(data.ibm_is_vpc.project)},${jsonencode(data.ibm_is_region.mzr)}]
 
     EOF 
 
@@ -24,7 +24,7 @@ resource "ibm_cos_bucket_object" "mzr_file" {
   bucket_crn      = data.ibm_cos_bucket.south.crn
   bucket_location = data.ibm_cos_bucket.south.region_location
   content         = <<EOF
-    ${jsonencode(data.ibm_is_region.mzr)}
+  ${jsonencode(data.ibm_is_region.mzr)}
 
     EOF 
 
@@ -39,3 +39,23 @@ resource "ibm_cos_bucket_object" "vpc_file" {
 
   key = "${local.time}-vpc-details.json"
 }
+
+resource "ibm_cos_bucket_object" "count_test" {
+  count           = length(data.ibm_is_vpc.subnets)
+  bucket_crn      = data.ibm_cos_bucket.south.crn
+  bucket_location = data.ibm_cos_bucket.south.region_location
+  content         = <<EOF
+  echo ${[count.index]}
+
+    EOF 
+
+  key = "${local.time}-count-details.json"
+}
+
+# resource ibm_is_flow_log test_flowlog {
+#   count = length(data.ibm_is_vpc.subnets)
+#   name = "test-instance-flow-log"
+#   target = ibm_is_instance.testacc_instance.id
+#   active = true
+#   storage_bucket = ibm_cos_bucket.bucket1.bucket_name
+# }
