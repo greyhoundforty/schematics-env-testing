@@ -48,7 +48,7 @@ resource "ibm_cos_bucket_object" "count_test" {
   things
     EOF 
 
-  key = "${local.time}-count-details.json"
+  key = "${local.time}-${count.index+1}-details.json"
 }
 
 # resource ibm_is_flow_log test_flowlog {
