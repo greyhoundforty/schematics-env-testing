@@ -1,6 +1,6 @@
-output "schematics_env" {
-  value = jsonencode(data.external.env)
-}
+# output "schematics_env" {
+#   value = jsonencode(data.external.env)
+# }
 
 output "resource_group" {
   value = data.ibm_resource_group.project
@@ -21,4 +21,8 @@ output "region_info" {
 
 output "zones" {
   value = data.ibm_is_zones.mzr
+}
+
+output "schematics_location" {
+  value = lookup(data.external.env.result, "TF_VAR_SCHEMATICSLOCATION", "")
 }
