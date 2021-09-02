@@ -45,7 +45,7 @@ resource "ibm_cos_bucket_object" "shematics_file" {
   bucket_crn      = data.ibm_cos_bucket.south.crn
   bucket_location = data.ibm_cos_bucket.south.region_location
   content         = <<EOF
-  ${jsonencode(data.external.env.result[])}
+  ${jsonencode(data.external.env.result.*)}
   
   EOF
 
