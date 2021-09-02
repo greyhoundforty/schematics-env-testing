@@ -20,5 +20,5 @@ output "region_info" {
 }
 
 output "zones" {
-  value = data.ibm_zones.mzr
+  value = data.ibm_is_zones.mzr
 }
