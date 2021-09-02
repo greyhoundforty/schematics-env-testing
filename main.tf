@@ -1,7 +1,7 @@
 resource "local_file" "details" {
   content = <<EOF
-    data.ibm_is_vpc.project
-    data.ibm_is_region.mzr
+    ${jsonencode(data.ibm_is_vpc.project, data.ibm_is_region.mzr)},
+    ${jsonencode(data.ibm_is_region.mzr)}
 
     EOF 
 
