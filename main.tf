@@ -41,7 +41,7 @@ resource "ibm_cos_bucket_object" "vpc_file" {
 }
 
 resource "ibm_cos_bucket_object" "count_test" {
-  count           = length(data.ibm_is_vpc.subnets)
+  count           = length(data.ibm_is_vpc.project.subnets)
   bucket_crn      = data.ibm_cos_bucket.south.crn
   bucket_location = data.ibm_cos_bucket.south.region_location
   content         = <<EOF
