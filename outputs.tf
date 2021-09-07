@@ -10,18 +10,18 @@
 #   value = data.ibm_is_vpc.project
 # }
 
-output "tgw_info" {
-  value = data.ibm_tg_gateway.project
-}
+# output "tgw_info" {
+#   value = data.ibm_tg_gateway.project
+# }
 
 
 # output "region_info" {
 #   value = data.ibm_is_region.mzr
 # }
 
-output "zones" {
-  value = data.ibm_is_zones.mzr
-}
+# output "zones" {
+#   value = data.ibm_is_zones.mzr
+# }
 
 output "schematics_location" {
   value = lookup(data.external.env.result, "TF_VAR_SCHEMATICSLOCATION", "")
@@ -30,5 +30,11 @@ output "schematics_location" {
 output "schematics_ssh_access_ips" {
   value = local.schematics_ssh_access
 }
+
+output "schematics_workspace" {
+  value = lookup(data.external.env.result, "TF_VAR_IC_SCHEMATICS_WORKSPACE_ID", "")
+}
+
+
 
 
